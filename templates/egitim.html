@@ -14,8 +14,9 @@
       <h4 id="task-title">Yükleniyor...</h4>
       <div id="task-content" class="mb-3"></div>
       <div id="task-input" class="mb-3"></div>
-      <button class="btn btn-success" onclick="submitAnswer()">Cevabı Gönder ✅</button>
+      <button class="btn btn-success" onclick="submitAnswer()" id="submitBtn">Cevabı Gönder ✅</button>
       <div id="feedback" class="mt-3"></div>
+      <button id="nextButton" onclick="nextTask()" style="display: none;" class="btn btn-primary mt-3">Sıradaki Göreve Geç ➡️</button>
     </div>
   </div>
 
@@ -35,10 +36,15 @@
       document.getElementById("task-title").innerText = task.title;
       document.getElementById("task-content").innerText = task.content;
       document.getElementById("feedback").innerText = "";
+      document.getElementById("nextButton").style.display = "none";
       const inputDiv = document.getElementById("task-input");
+      const submitBtn = document.getElementById("submitBtn");
+
       inputDiv.innerHTML = "";
 
       if (task.type === "quiz") {
+        submitBtn.innerText = "Cevabı Gönder ✅";
+        submitBtn.style.display = "inline-block";
         task.options.forEach((opt, index) => {
           inputDiv.innerHTML += `
             <div class="form-check">
@@ -48,21 +54,26 @@
           `;
         });
       } else if (task.type === "text") {
+        submitBtn.innerText = "Cevabı Gönder ✅";
+        submitBtn.style.display = "inline-block";
         inputDiv.innerHTML = `
           <textarea class="form-control" id="text-answer" rows="3" placeholder="Cevabını yaz..."></textarea>
         `;
       } else if (task.type === "info") {
+        submitBtn.innerText = "Devam Et ➡️";
+        submitBtn.style.display = "inline-block";
         inputDiv.innerHTML = "";
-        document.querySelector("button").innerText = "Devam Et ➡️";
       } else if (task.type === "end") {
+        submitBtn.innerText = "Ana Sayfaya Dön ⬅️";
+        submitBtn.style.display = "inline-block";
         inputDiv.innerHTML = "";
-        document.querySelector("button").innerText = "Ana Sayfaya Dön ⬅️";
       }
     }
 
     function submitAnswer() {
       const task = tasks[currentTask];
       const feedbackDiv = document.getElementById("feedback");
+      const nextBtn = document.getElementById("nextButton");
 
       if (task.type === "quiz") {
         const selected = document.querySelector('input[name="quiz"]:checked');
@@ -72,7 +83,7 @@
         }
         if (task.correct.includes(parseInt(selected.value))) {
           feedbackDiv.innerHTML = "<span class='text-success'>✅ Doğru cevap!</span>";
-          setTimeout(nextTask, 1000);
+          nextBtn.style.display = "inline-block";
         } else {
           feedbackDiv.innerHTML = "<span class='text-danger'>❌ Yanlış cevap. Tekrar dene.</span>";
         }
@@ -106,21 +117,20 @@
             <p><strong>AI Değerlendirme: ${feedback.puan}/5 ⭐</strong></p>
             <p>${feedback.geri_bildirim}</p>
           `;
-          setTimeout(nextTask, 3000);
+          nextBtn.style.display = "inline-block";
         })
         .catch(err => {
           console.error(err);
           feedbackDiv.innerHTML = "<span class='text-danger'>Bağlantı hatası. Lütfen tekrar dene.</span>";
         });
 
-      } else if (task.type === "info") {
+      } else if (task.type === "info" || task.type === "end") {
         nextTask();
-      } else if (task.type === "end") {
-        window.location.href = "/";
       }
     }
 
     function nextTask() {
+      document.getElementById("nextButton").style.display = "none";
       currentTask++;
       if (currentTask >= tasks.length) {
         window.location.href = "/";
