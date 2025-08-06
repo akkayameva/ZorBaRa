@@ -2,21 +2,35 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
-  <title>Zorbara – Siber Zorbalık Rehberi</title>
+  <title>ZorBaRa – Siber Zorbalık Rehberi</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
   <div class="container mt-5">
-    <h1 class="text-center mb-4">🛡️ Zorbara</h1>
+    <h1 class="text-center mb-4">🛡️ ZorBaRa</h1>
     <p class="text-center">Siber zorbalıkla baş etmen için buradayım!</p>
 
     <div class="card p-4">
-      <div id="chat-box" style="height: 300px; overflow-y: auto; border: 1px solid #ccc;" class="mb-3 p-2 rounded"></div>
-      <div class="input-group">
+      <div id="chat-box" style="height: 300px; overflow-y: auto; border: 1px solid #ccc;" class="mb-3 p-2 rounded">
+        <div>
+          <strong>ZorBaRa:</strong><br>
+          Merhaba! Ben ZorBaRa - Zorbalık Radarım açık, seni dinliyorum.👋 <br><br>
+          💬 Burası senin güvenli alanın. İstersen yaşadıklarını paylaşabilir, ister sadece sohbet edebilirsin.<br><br>
+          💡 Zorbalık bazen açık açık görünür, bazen de gizlenir… Ama birlikte, bunları fark etmek ve başa çıkmak mümkün.<br><br>
+          🧠 Ayrıca senin için küçük görevler hazırladım.<br>
+          Bu görevleri tamamladıkça, çevrendeki zorbalıkları fark etme gücün – biz buna “Zorbalık Radarın” diyoruz – gelişecek!<br><br>
+          🎯 Hepsini tamamladığında “Zorbalık Avcısı” rozetini kazanacaksın.<br>
+          Hazırsan hemen başlayabilirsin:<br>
+          👉 <a href="/egitim" class="btn btn-warning btn-sm mt-2">🎓 Eğitime Başla</a>
+        </div>
+      </div>
+
+      <div class="input-group mt-2">
         <input type="text" id="user-input" class="form-control" placeholder="Bir şey yaz..." />
         <button class="btn btn-primary" onclick="sendMessage()">Gönder</button>
+        <a href="/egitim" class="btn btn-outline-warning">🎓 Eğitime Başla</a>
       </div>
     </div>
   </div>
@@ -31,6 +45,19 @@
       chatBox.innerHTML += `<div><strong>Sen:</strong> ${message}</div>`;
       input.value = "";
 
+      // Eğitim kelimesi geçtiyse öneri butonu
+      const lower = message.toLowerCase();
+      if (lower.includes("eğitim") || lower.includes("görev") || lower.includes("modül")) {
+        chatBox.innerHTML += `
+          <div><strong>ZorBaRa:</strong> Eğitimle ilgilenmen harika! 🎓<br>
+          Hemen başlayabilirsin:
+          <a href="/egitim" class="btn btn-sm btn-warning mt-1">🎓 Eğitim Modülüne Git</a></div>
+        `;
+        chatBox.scrollTop = chatBox.scrollHeight;
+        return;
+      }
+
+      // Normal cevap akışı
       const response = await fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -38,7 +65,7 @@
       });
 
       const data = await response.json();
-      chatBox.innerHTML += `<div><strong>Zorbara:</strong> ${data.reply}</div>`;
+      chatBox.innerHTML += `<div><strong>ZorBaRa:</strong> ${data.reply}</div>`;
       chatBox.scrollTop = chatBox.scrollHeight;
     }
   </script>
