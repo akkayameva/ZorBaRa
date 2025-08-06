@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
-from gemini_api import get_gemini_response, evaluate_answer_with_gemini
+from gemini_api import get_gemini_response_with_emergency_flag, evaluate_answer_with_gemini
 import json
 
 app = Flask(__name__)
@@ -20,15 +20,17 @@ def chat():
     if not user_input:
         return jsonify({"error": "Mesaj boş olamaz"}), 400
 
-    reply = get_gemini_response(f"Kullanıcı dedi ki: {user_input}\nCevabın çocuklara/ergenlere uygun, empatik ve siber zorbalık karşıtı olsun.")
-    return jsonify({"reply": reply})
+    reply, emergency = get_gemini_response_with_emergency_flag(user_input)
+    return jsonify({
+        "reply": reply,
+        "emergency": emergency
+    })
 
 @app.route("/evaluate", methods=["POST"])
 def evaluate():
     data = request.get_json()
     soru = data.get("soru")
     cevap = data.get("cevap")
-
     if not soru or not cevap:
         return jsonify({"error": "Soru veya cevap eksik."}), 400
 
@@ -39,7 +41,5 @@ def evaluate():
     except json.JSONDecodeError:
         return jsonify({"error": "Gemini'den geçerli JSON gelmedi."}), 500
 
-
 if __name__ == "__main__":
     app.run(debug=True)
-

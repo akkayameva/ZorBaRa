@@ -45,19 +45,6 @@
       chatBox.innerHTML += `<div><strong>Sen:</strong> ${message}</div>`;
       input.value = "";
 
-      // Eğitim kelimesi geçtiyse öneri butonu
-      const lower = message.toLowerCase();
-      if (lower.includes("eğitim") || lower.includes("görev") || lower.includes("modül")) {
-        chatBox.innerHTML += `
-          <div><strong>ZorBaRa:</strong> Eğitimle ilgilenmen harika! 🎓<br>
-          Hemen başlayabilirsin:
-          <a href="/egitim" class="btn btn-sm btn-warning mt-1">🎓 Eğitim Modülüne Git</a></div>
-        `;
-        chatBox.scrollTop = chatBox.scrollHeight;
-        return;
-      }
-
-      // Normal cevap akışı
       const response = await fetch("/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,9 +52,28 @@
       });
 
       const data = await response.json();
-      chatBox.innerHTML += `<div><strong>ZorBaRa:</strong> ${data.reply}</div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
+      const reply = data.reply;
+      const emergency = data.emergency;
+
+      if (emergency) {
+      document.querySelector(".card").classList.add("emergency-mode");
     }
+
+    chatBox.innerHTML += `<div><strong>ZorBaRa:</strong> ${reply}</div>`;
+
+    if (emergency) {
+      chatBox.innerHTML += `
+        <div class="mt-2">
+          <strong>🤝 Yardımcı Olabilecek Yerler:</strong><br>
+          <a href="tel:183" class="btn btn-sm btn-warning mt-2 me-2">📞 183 – Sosyal Destek Hattı</a>
+          <a href="tel:112" class="btn btn-sm btn-danger mt-2 me-2">🚑 112 – Acil Sağlık Yardımı</a>
+          <a href="tel:155" class="btn btn-sm btn-primary mt-2">🚔 155 – Polis İmdat</a>
+        </div>
+      `;
+    }
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
   </script>
 </body>
 </html>

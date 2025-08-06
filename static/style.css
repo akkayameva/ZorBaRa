@@ -9,3 +9,15 @@ body {
 #chat-box div {
   margin-bottom: 10px;
 }
+
+.emergency-mode {
+  background-color: #fff3cd !important;
+  border: 2px solid #f1c40f !important;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 5px #f1c40f; }
+  50% { box-shadow: 0 0 20px #f1c40f; }
+  100% { box-shadow: 0 0 5px #f1c40f; }
+}

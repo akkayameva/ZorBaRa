@@ -1,19 +1,11 @@
 import google.generativeai as genai
 import os
+import json
 from dotenv import load_dotenv
 
-import json
-
 load_dotenv()
-
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
-
-model = genai.GenerativeModel("gemini-1.5-flash-latest")
-
-
-def get_gemini_response(prompt):
-    response = model.generate_content(prompt)
-    return response.text.strip()
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 def evaluate_answer_with_gemini(soru, cevap):
     prompt = (
@@ -25,22 +17,16 @@ def evaluate_answer_with_gemini(soru, cevap):
         "Yanıtta sadece geçerli bir JSON döndür. Açıklama yapma. Sadece şunu ver:\n"
         "{\n  \"puan\": <1-5>,\n  \"geri_bildirim\": \"...\"\n}"
     )
-
     try:
         response = model.generate_content(prompt)
         yanit = response.text.strip()
-
-
         if yanit.startswith("```"):
             yanit = yanit.strip("`")
             if "json" in yanit:
                 yanit = yanit.replace("json", "", 1).strip()
-
         print("✅ Temizlenmiş JSON:", yanit)
-
         json_obj = json.loads(yanit)
         return json.dumps(json_obj, ensure_ascii=False)
-
     except Exception as e:
         print("❌ JSON değerlendirme hatası:", e)
         return json.dumps({
@@ -48,7 +34,19 @@ def evaluate_answer_with_gemini(soru, cevap):
             "geri_bildirim": "AI değerlendirmesi alınamadı. Lütfen tekrar deneyin."
         }, ensure_ascii=False)
 
-
-
-
-
+def get_gemini_response_with_emergency_flag(prompt):
+    full_prompt = (
+        f"Kullanıcının mesajı:\n\"{prompt}\"\n\n"
+        "1. Önce pedagojik ve empatik bir dille, çocuğa/ergene hitap ederek yanıt ver.\n"
+        "2. Ardından, bu mesaj sence aşağıdaki kritik durumlardan birini içeriyor mu?\n"
+        "- İntihar düşüncesi\n- Taciz, istismar\n- Şiddet tehdidi\n- Ciddi depresyon belirtisi\n\n"
+        "Eğer böyle bir durum varsa, sadece şunu en alta ekle:\n"
+        "ACİL_DURUM: EVET\n\n"
+        "Eğer yoksa:\n"
+        "ACİL_DURUM: HAYIR\n"
+    )
+    response = model.generate_content(full_prompt)
+    full_response = response.text.strip()
+    emergency = "ACİL_DURUM: EVET" in full_response
+    reply = full_response.replace("ACİL_DURUM: EVET", "").replace("ACİL_DURUM: HAYIR", "").strip()
+    return reply, emergency
