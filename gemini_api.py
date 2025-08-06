@@ -24,7 +24,6 @@ def evaluate_answer_with_gemini(soru, cevap):
             yanit = yanit.strip("`")
             if "json" in yanit:
                 yanit = yanit.replace("json", "", 1).strip()
-        print("✅ Temizlenmiş JSON:", yanit)
         json_obj = json.loads(yanit)
         return json.dumps(json_obj, ensure_ascii=False)
     except Exception as e:
@@ -33,6 +32,7 @@ def evaluate_answer_with_gemini(soru, cevap):
             "puan": 0,
             "geri_bildirim": "AI değerlendirmesi alınamadı. Lütfen tekrar deneyin."
         }, ensure_ascii=False)
+
 
 def get_gemini_response_with_emergency_flag(prompt):
     full_prompt = (
@@ -45,8 +45,38 @@ def get_gemini_response_with_emergency_flag(prompt):
         "Eğer yoksa:\n"
         "ACİL_DURUM: HAYIR\n"
     )
-    response = model.generate_content(full_prompt)
-    full_response = response.text.strip()
-    emergency = "ACİL_DURUM: EVET" in full_response
-    reply = full_response.replace("ACİL_DURUM: EVET", "").replace("ACİL_DURUM: HAYIR", "").strip()
-    return reply, emergency
+    try:
+        response = model.generate_content(full_prompt)
+        full_response = response.text.strip()
+        emergency = "ACİL_DURUM: EVET" in full_response
+        reply = full_response.replace("ACİL_DURUM: EVET", "").replace("ACİL_DURUM: HAYIR", "").strip()
+        return reply, emergency
+    except Exception as e:
+        print("❌ Emergency kontrol hatası:", e)
+        return "Bir sorun oluştu. Lütfen tekrar dene.", False
+
+
+def get_gemini_response_with_context(prompt, history=None):
+    """
+    Multi-turn chat için bağlamlı cevap üretir.
+    history: ["kullanıcı mesajı", "bot cevabı", "kullanıcı mesajı", ...]
+    """
+    if history is None:
+        history = []
+
+    messages = []
+    for i, msg in enumerate(history):
+        role = "user" if i % 2 == 0 else "model"
+        messages.append({"role": role, "parts": [msg]})
+    messages.append({"role": "user", "parts": [prompt]})
+
+    try:
+        convo = model.start_chat(history=messages)
+        response = convo.send_message(prompt)
+        yanit = response.text.strip()
+        emergency = "ACİL_DURUM: EVET" in yanit
+        yanit = yanit.replace("ACİL_DURUM: EVET", "").replace("ACİL_DURUM: HAYIR", "").strip()
+        return yanit, emergency
+    except Exception as e:
+        print("❌ Multi-turn chat hatası:", e)
+        return "Bir sorun oluştu. Lütfen tekrar dene.", False

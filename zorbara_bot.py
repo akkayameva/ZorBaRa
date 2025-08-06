@@ -6,7 +6,8 @@ from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
     filters, ConversationHandler, ContextTypes
 )
-from gemini_api import evaluate_answer_with_gemini, get_gemini_response_with_emergency_flag
+from gemini_api import evaluate_answer_with_gemini, get_gemini_response_with_emergency_flag, \
+    get_gemini_response_with_context
 
 load_dotenv()
 TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -139,16 +140,15 @@ class ZorBaRaBot:
 
         # 🔁 Geçmişi güncelle
         self.sohbet_gecmisi.setdefault(user_id, []).append(mesaj)
-        if len(self.sohbet_gecmisi[user_id]) > 3:
-            self.sohbet_gecmisi[user_id] = self.sohbet_gecmisi[user_id][-3:]
+        if len(self.sohbet_gecmisi[user_id]) > 10:
+            self.sohbet_gecmisi[user_id] = self.sohbet_gecmisi[user_id][-10:]
 
-        # 🧠 Gemini ile yanıt ve acil durum kontrolü
-        onceki = self.sohbet_gecmisi[user_id][:-1]
-        son = self.sohbet_gecmisi[user_id][-1]
-        prompt = "\n".join(f"Kullanıcı: {m}" for m in onceki) + f"\nKullanıcı: {son}"
+        gecmis = self.sohbet_gecmisi[user_id]
+        yanit, acil = get_gemini_response_with_context(mesaj, gecmis[:-1])
 
-        yanit, acil = get_gemini_response_with_emergency_flag(prompt)
+        # 💬 Yanıtı göster ve geçmişe ekle
         await update.message.reply_text(yanit)
+        self.sohbet_gecmisi[user_id].append(yanit)
 
         if acil:
             await update.message.reply_text(
