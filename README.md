@@ -5,7 +5,7 @@
 ![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![Gemini API](https://img.shields.io/badge/Gemini%20API-4285F4?style=for-the-badge&logo=google&logoColor=white)
 
-<img src="https://github.com/akkayameva/ZorBaRa/blob/main/images/zorbara.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara.png?raw=true"  />
 
 ## ?? Zorbalýk ve Siber Zorbalýk Nedir?
 
@@ -32,7 +32,7 @@ Ayrýca bu konuda farkýndalýk oldukça önemlidir. ZorBaRa ile bu farkýndalýk eðiti
 
 ZorBaRa, çocuklara ve gençlere yönelik siber zorbalýkla mücadele için geliþtirilmiþ **yapay zekâ destekli** bir eðitim ve destek platformudur.
 
-<img src="https://github.com/akkayameva/ZorBaRa/blob/main/images/zorbara_yanýnda.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_yanýnda.png?raw=true"  />
 
 ### ?? 3 Ana Modül
 
@@ -57,7 +57,7 @@ ZorBaRa, yalnýzca sohbet eden bir yapay zekâdan çok daha fazlasýdýr. Eðitim, kri
 > **“ZorBaRa sadece konuþmaz; eðitir, hisseder, korur.”**
 
 
-<img src="https://github.com/akkayameva/ZorBaRa/blob/main/images/zorbara_konus.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_konus.png?raw=true"  />
 
 
 ## ?? Eðitici Özelliði
@@ -80,7 +80,6 @@ Gemini'nin katkýsýyla her kullanýcý:
 
 - Empati ve dijital etik gibi duygusal beceriler kazanýr
 
-![Eðitim ve Rozetler](zorbara_egitim_rozet.png)
 
 ## ?? Teknik Bileþenler
 
@@ -92,9 +91,9 @@ Gemini'nin katkýsýyla her kullanýcý:
 
 - **Pedagojik Yapý:** Empatik dil + görsel destek + görev temelli öðrenme
 
-<img src="https://github.com/akkayameva/ZorBaRa/blob/main/images/zorbara_baslangic.png?raw=true"  />
-<img src="https://github.com/akkayameva/ZorBaRa/blob/main/images/zorbara_acil.png?raw=true"  />
-<img src="https://github.com/akkayameva/ZorBaRa/blob/main/images/zorbara_rozet.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_baslangic.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_acil.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_rozet.png?raw=true"  />
 
 ## ?? BTK Yarýþmasý Baðlamý
 
