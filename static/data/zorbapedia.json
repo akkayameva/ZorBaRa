@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Siber Zorbalık Nedir?",
+    "content": "Dijital ortamda bir kişiyi kasıtlı olarak incitmek, tehdit etmek, küçük düşürmek ya da dışlamak.",
+    "tags": ["tanım", "temel"],
+    "tips": [
+      "Niyet değil, etki önemlidir.",
+      "Tekrarlayıcı veya etkisi büyük bir eylem olabilir."
+    ]
+  },
+  {
+    "title": "Şaka mı Zorbalık mı?",
+    "content": "Karşı taraf inciniyorsa ve bunu iletiyorsa ‘şakaydı’ demek zorbalığı meşrulaştırmaz.",
+    "tags": ["şaka", "sınırlar"],
+    "tips": [
+      "‘Buna gülmüyorum’ gibi net sınır ifadeleri kullan.",
+      "Gerekirse uzaklaş, destek iste."
+    ]
+  },
+  {
+    "title": "Kanıt Saklama",
+    "content": "Ekran görüntüsü almak, tarih/saat notlamak ve dosyaları güvenli bir yerde tutmak önemlidir.",
+    "tags": ["kanıt", "güvenlik"],
+    "tips": [
+      "Cihazında ayrı bir klasör aç.",
+      "Buluta da yedekleyebilirsin."
+    ]
+  },
+  {
+    "title": "Engelleme & Raporlama",
+    "content": "Platformların ‘engelle/raporla’ araçları güvenlik için var. Kullanmaktan çekinme.",
+    "tags": ["platform", "güvenlik"],
+    "tips": [
+      "Engelledikten sonra tartışmaya girme.",
+      "Platform rehberlerini incele."
+    ]
+  },
+  {
+    "title": "Tanık Olmak",
+    "content": "Sessizlik onay gibi algılanabilir. Güvenliysen destek mesajı at, bildir, yetişkine haber ver.",
+    "tags": ["tanık", "müdahale"],
+    "tips": [
+      "Hedef kişiye ‘yanındayım’ mesajı gönder.",
+      "Güvenli adımlar at; kendini riske atma."
+    ]
+  },
+  {
+    "title": "Sınır Koyma",
+    "content": "Kısaca, net ve saygılı bir dille rahatsızlığını belirtmek işe yarar.",
+    "tags": ["iletişim", "sınırlar"],
+    "tips": [
+      "‘Böyle konuşulmasından hoşlanmıyorum.’",
+      "‘Lütfen buna son ver.’"
+    ]
+  },
+  {
+    "title": "Duyguları Düzenleme",
+    "content": "Nefes egzersizi, kısa mola, güvendiğin biriyle konuşmak duygusal yükü azaltır.",
+    "tags": ["duygu", "özbakım"],
+    "tips": [
+      "4-7-8 nefes tekniği dene.",
+      "Günlük tut, duygunu isimlendir."
+    ]
+  },
+  {
+    "title": "Yardım İsteme",
+    "content": "Aile, öğretmen, rehberlik, okul yönetimi veya 183/112/155 gibi resmi hatlar destek sağlar.",
+    "tags": ["yardım", "hatlar"],
+    "tips": [
+      "Tehlike anında 112 veya 155.",
+      "183 sosyal destek hattını kaydet."
+    ]
+  },
+  {
+    "title": "Hukuki Çerçeve (Özet)",
+    "content": "Hakaret, tehdit, özel hayatın gizliliğini ihlal suçtur. Kanıt saklamak önemlidir.",
+    "tags": ["hukuk", "haklar"],
+    "tips": [
+      "Okul/kurum yönergelerini öğren.",
+      "Gerekirse bir yetişkinle kolluğa başvur."
+    ]
+  },
+  {
+    "title": "Dijital Ayak İzi",
+    "content": "Paylaşımlar uzun süre kalabilir. Güvenlik ve gizlilik ayarlarını düzenli kontrol et.",
+    "tags": ["gizlilik", "profil"],
+    "tips": [
+      "Hesaplarını ‘özel’ yapmayı düşün.",
+      "Takipçi listeni gözden geçir."
+    ]
+  }
+]

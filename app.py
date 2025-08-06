@@ -41,6 +41,10 @@ def chat():
         "show_education_prompt": education_needed
     })
 
+@app.route("/rozet")
+def rozet():
+    return render_template("rozet.html")
+
 @app.route("/evaluate", methods=["POST"])
 def evaluate():
     data = request.get_json()

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rozetin – ZorBaRa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    .badge-card { max-width: 520px; margin: 40px auto; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="card p-4 text-center badge-card">
+    <h3>🏅 Rozetin</h3>
+    <img src="/static/img/rozet.png" alt="Rozet" class="img-fluid my-3" />
+    <h5 id="badge-name">Rozet yükleniyor…</h5>
+    <p class="text-muted">ZorBaRa Eğitim Modülünde gösterdiğin çaba için tebrikler!</p>
+
+    <div class="d-flex justify-content-center gap-2 mt-2">
+      <button class="btn btn-warning" id="btn-share">Paylaş 🔗</button>
+      <a href="/" class="btn btn-outline-primary">💬 Sohbete Dön</a>
+      <a href="/egitim" class="btn btn-outline-secondary">🎓 Eğitime Dön</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const badge = localStorage.getItem("zb_badge") || "🏅 Zorbalık Avcısı";
+  document.getElementById("badge-name").innerText = badge;
+
+  document.getElementById("btn-share").onclick = () => {
+    const text = `ZorBaRa’da rozetimi kazandım: ${badge}! #ZorBaRa #SiberZorbalık`;
+    if (navigator.share) {
+      navigator.share({ text }).catch(()=>copy(text));
+    } else {
+      copy(text);
+    }
+  };
+  function copy(t) {
+    navigator.clipboard.writeText(t);
+    alert("Paylaşım metni panoya kopyalandı. Sosyal medyada yapıştırabilirsin!");
+  }
+</script>
+</body>
+</html>

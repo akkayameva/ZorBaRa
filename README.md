@@ -1,4 +1,3 @@
-
 # ZorBaRa 
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
@@ -7,112 +6,126 @@
 
 <img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara.png?raw=true"  />
 
-## ?? Zorbalık ve Siber Zorbalık Nedir?
+## ğŸ›‘ ZorbalÄ±k ve Siber ZorbalÄ±k Nedir?
 
-Siber zorbalık, dijital ortamlarda (sosyal medya, mesajlaşma uygulamaları, oyun platformları vb.) bir kişiye yönelik tekrarlayan, kasıtlı ve zarar verici davranışlardır.
+ZorbalÄ±k, bir kiÅŸiye karÅŸÄ± kasÄ±tlÄ± olarak yapÄ±lan, tekrarlayan fiziksel, sÃ¶zel ya da psikolojik zarar verici davranÄ±ÅŸlardÄ±r. Genellikle gÃ¼Ã§ dengesizliÄŸi iÃ§erir.
+Siber zorbalÄ±k, dijital ortamlarda (sosyal medya, mesajlaÅŸma uygulamalarÄ±, oyun platformlarÄ± vb.) bir kiÅŸiye yÃ¶nelik tekrarlayan, kasÄ±tlÄ± ve zarar verici davranÄ±ÅŸlardÄ±r.
 
-### ?? Çocuklara Etkisi
+### ğŸ¯ Ã‡ocuklara Etkisi
 
-- **Psikolojik zarar:** Depresyon, anksiyete, özgüven kaybı
-- **Akademik performans:** Düşüş, isteksizlik
-- **Sosyal izolasyon:** Arkadaş ilişkilerinden uzaklaşma
+- **Psikolojik zarar:** Depresyon, anksiyete, Ã¶zgÃ¼ven kaybÄ±
+- **Akademik performans:** DÃ¼ÅŸÃ¼ÅŸ, isteksizlik
+- **Sosyal izolasyon:** ArkadaÅŸ iliÅŸkilerinden uzaklaÅŸma
 
-### ?? Neden İhtiyaç?
+### ğŸ¤ Neden Ä°htiyaÃ§?
 
-Siber zorbalığa uğrayan bireyler genellikle yaşadıklarını paylaşmakta zorlanır:
+Siber zorbalÄ±ÄŸa uÄŸrayan bireyler genellikle yaÅŸadÄ±klarÄ±nÄ± paylaÅŸmakta zorlanÄ±r:
 
-- Utanma, damgalanma ve suçluluk duygusu
-- Aile veya öğretmenle paylaşamama
-- "Abartıyor muyum?" kaygısı
+- Utanma, damgalanma ve suÃ§luluk duygusu
+- Aile veya Ã¶ÄŸretmenle paylaÅŸamama
+- "AbartÄ±yor muyum?" kaygÄ±sÄ±
 
-İşte ZorBaRa, bu sessizliğin içinden güvenle seslenebilen dijital bir destek sistemidir. 
-Ayrıca bu konuda farkındalık oldukça önemlidir. ZorBaRa ile bu farkındalık eğitimi sağlanmaktadır
+Ä°ÅŸte ZorBaRa, bu sessizliÄŸin iÃ§inden gÃ¼venle seslenebilen dijital bir destek sistemidir. 
+AyrÄ±ca bu konuda farkÄ±ndalÄ±k oldukÃ§a Ã¶nemlidir. ZorBaRa ile bu farkÄ±ndalÄ±k eÄŸitimi saÄŸlanmaktadÄ±r
 
-## ?? ZorBaRa Ne Sunar?
+## ğŸ’¡ ZorBaRa Ne Sunar?
 
-ZorBaRa, çocuklara ve gençlere yönelik siber zorbalıkla mücadele için geliştirilmiş **yapay zekâ destekli** bir eğitim ve destek platformudur.
+ZorBaRa, Ã§ocuklara ve genÃ§lere yÃ¶nelik siber zorbalÄ±kla mÃ¼cadele iÃ§in geliÅŸtirilmiÅŸ **yapay zekÃ¢ destekli** bir eÄŸitim ve destek platformudur.
 
-<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_yanında.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_yanÄ±nda.png?raw=true"  />
 
-### ?? 3 Ana Modül
+### ğŸš¨ 3 Ana ModÃ¼l
 
-- **Eğitim Modülü:** Görev bazlı öğrenme ve geribildirim
-- **Destek Modülü:** Empatik sohbet
-- **Acil Müdahale Modülü:** Bağlamsal analiz ile kriz algılama
+- **EÄŸitim ModÃ¼lÃ¼:** GÃ¶rev bazlÄ± Ã¶ÄŸrenme ve geribildirim
+- **Destek ModÃ¼lÃ¼:** GÃ¼nlÃ¼k GÃ¶rev, Empatik YaklaÅŸÄ±m, ZorbaraPedia - Bilgi KÃ¼tÃ¼phanesi
+- **Acil MÃ¼dahale ModÃ¼lÃ¼:** BaÄŸlamsal analiz ile kriz algÄ±lama
 
-## ?? ZorBaRa Neden Sıradan Bir Chatbot Değil?
+## ğŸ¤– ZorBaRa Neden SÄ±radan Bir Chatbot DeÄŸil?
 
-ZorBaRa, yalnızca sohbet eden bir yapay zekâdan çok daha fazlasıdır. Eğitim, kriz analizi, empatik yanıtlar ve çocuk psikolojisine duyarlı tasarımıyla klasik chatbotların ötesine geçer:
+ZorBaRa, yalnÄ±zca sohbet eden bir yapay zekÃ¢dan Ã§ok daha fazlasÄ±dÄ±r. EÄŸitim, kriz analizi, empatik yanÄ±tlar ve Ã§ocuk psikolojisine duyarlÄ± tasarÄ±mÄ±yla klasik chatbotlarÄ±n Ã¶tesine geÃ§er:
 
-| Özellik                      | **ZorBaRa**                                   | **Klasik Chatbotlar**                     |
+| Ã–zellik                      | **ZorBaRa**                                   | **Klasik Chatbotlar**                     |
 |-----------------------------|-----------------------------------------------|-------------------------------------------|
-| ?? Eğitim Görevleri         | Görev bazlı eğitim + Gemini değerlendirmesi   | Sınırlı bilgilendirme                     |
-| ?? Duygu & Bağlam Algısı    | Gemini ile duygusal analiz ve ACİL_DURUM tespiti | Genellikle yüzeysel yanıt üretimi       |
-| ??? Pedagojik Geri Bildirim  | Çocuklara özel empatik ve yönlendirici dil     | Genelleştirilmiş, mekanik yanıtlar       |
-| ??? Koruyucu Rol             | Zorbalığa karşı aktif destek ve koruma         | Bilgi odaklı, pasif rol                   |
-| ?? Oyunlaştırma              | Rozet, puan, görev sistemi                     | Yok ya da çok temel düzeyde              |
-| ?? Karakter Temsili         | Sevimli ve güven veren radar karakteri         | Genellikle simgesiz / soyut karakterler  |
-| ?? Farkındalık & Erişilebilirlik | İçinde farkındalık geliştiren görevler&eğitim bulunmakta           | Ticari, geniş kitleye hitap eden çözümler|
+| ğŸ“ EÄŸitim GÃ¶revleri         | GÃ¶rev bazlÄ± eÄŸitim + Gemini deÄŸerlendirmesi   | SÄ±nÄ±rlÄ± bilgilendirme                     |
+| ğŸ§  Duygu & BaÄŸlam AlgÄ±sÄ±    | Gemini ile duygusal analiz ve ACÄ°L_DURUM tespiti | Genellikle yÃ¼zeysel yanÄ±t Ã¼retimi       |
+| ğŸ—¨ï¸ Pedagojik Geri Bildirim  | Ã‡ocuklara Ã¶zel empatik ve yÃ¶nlendirici dil     | GenelleÅŸtirilmiÅŸ, mekanik yanÄ±tlar       |
+| ğŸ›¡ï¸ Koruyucu Rol             | ZorbalÄ±ÄŸa karÅŸÄ± aktif destek ve koruma         | Bilgi odaklÄ±, pasif rol                   |
+| ğŸ§© OyunlaÅŸtÄ±rma              | Rozet, puan, gÃ¶rev sistemi                     | Yok ya da Ã§ok temel dÃ¼zeyde              |
+| ğŸ§ Karakter Temsili         | Sevimli ve gÃ¼ven veren radar karakteri         | Genellikle simgesiz / soyut karakterler  |
+| ğŸ¯ FarkÄ±ndalÄ±k & EriÅŸilebilirlik | Ä°Ã§inde farkÄ±ndalÄ±k geliÅŸtiren gÃ¶revler&eÄŸitim bulunmakta           | Ticari, geniÅŸ kitleye hitap eden Ã§Ã¶zÃ¼mler|
 
-> **“ZorBaRa sadece konuşmaz; eğitir, hisseder, korur.”**
+> **â€œZorBaRa sadece konuÅŸmaz; eÄŸitir, hisseder, korur.â€**
 
 
 <img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_konus.png?raw=true"  />
 
 
-## ?? Eğitici Özelliği
+## ğŸ“ EÄŸitici Ã–zelliÄŸi
 
-ZorBaRa'nın eğitim modülünde Gemini:
+ZorBaRa'nÄ±n eÄŸitim modÃ¼lÃ¼nde Gemini:
 
-- ?? Görev başında çocuklara yönlendirici bilgi verir
+- ğŸ“˜ GÃ¶rev baÅŸÄ±nda Ã§ocuklara yÃ¶nlendirici bilgi verir
 
-- ?? Görev sonrasında çocuğun yanıtını değerlendirir
+- ğŸ§  GÃ¶rev sonrasÄ±nda Ã§ocuÄŸun yanÄ±tÄ±nÄ± deÄŸerlendirir
 
-- ?? Geri bildirimde pedagojik ve cesaretlendirici dil kullanır
+- ğŸ’¬ Geri bildirimde pedagojik ve cesaretlendirici dil kullanÄ±r
 
-- ?? Başarıyı rozet sistemiyle ödüllendirir
+- ğŸ… BaÅŸarÄ±yÄ± rozet sistemiyle Ã¶dÃ¼llendirir
 
-Gemini'nin katkısıyla her kullanıcı:
+Gemini'nin katkÄ±sÄ±yla her kullanÄ±cÄ±:
 
-- Kendi öğrenme sürecini yönetir
+- Kendi Ã¶ÄŸrenme sÃ¼recini yÃ¶netir
 
-- Zorbalığı tanır ve tepki stratejileri geliştirir
+- ZorbalÄ±ÄŸÄ± tanÄ±r ve tepki stratejileri geliÅŸtirir
 
-- Empati ve dijital etik gibi duygusal beceriler kazanır
+- Empati ve dijital etik gibi duygusal beceriler kazanÄ±r
 
 
-## ?? Teknik Bileşenler
+## ğŸ”§ Teknik BileÅŸenler
 
 - **Frontend:** HTML, CSS, JavaScript
 - **Backend:** Flask (Python)
 - **AI:** Gemini API - gemini-1.5-flash
-- **Bot Desteği:** Telegram / WhatsApp(?) bot entegrasyonu
-- **Veri:** JSON tabanlı görev sistemi, bağlamsal analiz
+- **Bot DesteÄŸi:** Telegram / WhatsApp(?) bot entegrasyonu
+- **Veri:** JSON tabanlÄ± gÃ¶rev sistemi, baÄŸlamsal analiz
 
-- **Pedagojik Yapı:** Empatik dil + görsel destek + görev temelli öğrenme
+- **Pedagojik YapÄ±:** Empatik dil + gÃ¶rsel destek + gÃ¶rev temelli Ã¶ÄŸrenme
 
+## TanÄ±tÄ±m Videosu
+
+[ZorBaRa TanÄ±tÄ±m Videosu](zorbara.mp4)
+
+## GÃ¶rseller
+
+###WEB
 <img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_baslangic.png?raw=true"  />
 <img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_acil.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_gÃ¶rev.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_pedia.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_empati.png?raw=true"  />
 <img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_rozet.png?raw=true"  />
 
-## ?? BTK Yarışması Bağlamı
-
-ZorBaRa projesi, **Bilgi Teknolojileri ve İletişim Kurumu (BTK)** tarafından düzenlenen yarışma kapsamında, çocukların dijital güvenliğini artırmak ve farkındalık oluşturmak amacıyla geliştirilmiştir.
-
-## ?? Gelecek Planları
-
-- ? WhatsApp Entegrasyonu
-- ? Eğitim Görevlerinin Kategorik Yapılandırılması
-- ? Görüntü İşleme ile Ekran Görüntüsü Analizi
-- ? Daha Fazla Rozet ve Ödüllendirme
+###TELEGRAM
 
 
-## ??? Neden ZorBaRa?
+## ğŸ¤ BTK YarÄ±ÅŸmasÄ± BaÄŸlamÄ±
 
-> "Radarın açık olsun! Zorbalığı fark et, sessiz kalma."
+ZorBaRa projesi, **Bilgi Teknolojileri ve Ä°letiÅŸim Kurumu (BTK)** tarafÄ±ndan dÃ¼zenlenen yarÄ±ÅŸma kapsamÄ±nda, Ã§ocuklarÄ±n dijital gÃ¼venliÄŸini artÄ±rmak ve farkÄ±ndalÄ±k oluÅŸturmak amacÄ±yla geliÅŸtirilmiÅŸtir.
 
-ZorBaRa yalnızca bir eğitim aracı değil; bir dijital güvenlik kalkanı, bir arkadaş, bir rehber olarak tasarlandı.
+## ğŸ”® Gelecek PlanlarÄ±
+
+- âœ… WhatsApp Entegrasyonu
+- âœ… EÄŸitim GÃ¶revlerinin Kategorik YapÄ±landÄ±rÄ±lmasÄ±
+- âœ… GÃ¶rÃ¼ntÃ¼ Ä°ÅŸleme ile Ekran GÃ¶rÃ¼ntÃ¼sÃ¼ Analizi
+- âœ… Daha Fazla Rozet ve Ã–dÃ¼llendirme
+
+
+## ğŸ›¡ï¸ Neden ZorBaRa?
+
+> "RadarÄ±n aÃ§Ä±k olsun! ZorbalÄ±ÄŸÄ± fark et, sessiz kalma."
+
+ZorBaRa yalnÄ±zca bir eÄŸitim aracÄ± deÄŸil; bir dijital gÃ¼venlik kalkanÄ±, bir arkadaÅŸ, bir rehber olarak tasarlandÄ±.
 
 ---
 
-*Bu proje toplumsal farkındalığı artırmak, çocukların dijital güvenliğini sağlamak ve onları bilinçli bireyler olarak yetiştirmek için Meva Akkaya tarafından geliştirilmiştir.*
+*Bu proje toplumsal farkÄ±ndalÄ±ÄŸÄ± artÄ±rmak, Ã§ocuklarÄ±n dijital gÃ¼venliÄŸini saÄŸlamak ve onlarÄ± bilinÃ§li bireyler olarak yetiÅŸtirmek iÃ§in Meva Akkaya tarafÄ±ndan geliÅŸtirilmiÅŸtir.*

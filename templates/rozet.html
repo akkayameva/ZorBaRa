@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>ZorBaRa – Rozetin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body { background:#f7f8fb; }
+    .badge-card { max-width:640px; margin:40px auto; }
+    .rozet-emoji { font-size:64px; line-height:1; }
+    .muted { color:#6c757d; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card p-4 badge-card text-center">
+      <h2 class="mb-2">🏅 Rozetin</h2>
+      <p class="muted mb-4">Tebrikler! ZorBaRa eğitiminde hedefe ulaştın.</p>
+
+      <div id="badgeView" class="p-4 border rounded bg-light mb-3">
+        <div class="rozet-emoji" id="badge-emoji">🥇</div>
+        <h3 id="badge-name" class="mt-2">Zorbalık Avcısı</h3>
+        <p class="mb-0">
+          <strong>Puanın:</strong> <span id="badge-points">0</span>
+        </p>
+      </div>
+
+      <div class="d-flex gap-2 justify-content-center flex-wrap">
+        <button class="btn btn-warning" id="shareBtn">🔗 Rozeti Paylaş</button>
+        <a class="btn btn-outline-primary" href="/">💬 Sohbete Dön</a>
+        <a class="btn btn-outline-secondary" href="/egitim">🎓 Eğitime Dön</a>
+      </div>
+
+      <p class="muted mt-3 mb-0" id="hint"></p>
+    </div>
+  </div>
+
+  <script>
+    // LocalStorage'dan oku
+    const pts  = Number(localStorage.getItem("zb_totalPoints") || "0");
+    const badge= localStorage.getItem("zb_badge") || (pts >= 70 ? "🥇 Zorbalık Avcısı" : "");
+
+    // Görünüm doldur
+    const pointsEl = document.getElementById("badge-points");
+    const nameEl   = document.getElementById("badge-name");
+    const emojiEl  = document.getElementById("badge-emoji");
+    const hintEl   = document.getElementById("hint");
+
+    pointsEl.textContent = pts;
+
+    if (!badge) {
+      // Hedefe ulaşmamışsa bilgilendir
+      emojiEl.textContent = "🎯";
+      nameEl.textContent  = "Henüz rozet kazanmadın";
+      hintEl.textContent  = "70+ puana ulaştığında rozetin burada görünecek. Devam! 🚀";
+      document.getElementById("shareBtn").disabled = true;
+    } else {
+      nameEl.textContent = badge.replace("🥇 ", "");
+      emojiEl.textContent = badge.startsWith("🥇") ? "🥇" : (badge.startsWith("🥈") ? "🥈" : "🥉");
+      hintEl.textContent  = "Harika iş çıkardın! Dilersen rozetini paylaşabilirsin. 🙌";
+    }
+
+    // Paylaş
+    const shareBtn = document.getElementById("shareBtn");
+    shareBtn.onclick = () => {
+      const txt = `ZorBaRa Eğitim Modülünü tamamladım! Puanım: ${pts}. Rozetim: ${badge || "—"} #ZorBaRa #SiberZorbalık`;
+      if (navigator.share) {
+        navigator.share({ text: txt }).catch(() => copy(txt));
+      } else {
+        copy(txt);
+      }
+    };
+
+    function copy(t){
+      navigator.clipboard.writeText(t).then(()=>{
+        alert("Paylaşım metni panoya kopyalandı. Sosyal medyada yapıştırabilirsin! ✅");
+      });
+    }
+  </script>
+</body>
+</html>
