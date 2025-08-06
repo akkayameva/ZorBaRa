@@ -39,8 +39,8 @@
     "min_length": 10
   },
   {
-    "title": "🎖️ Final Görevi: Rozet Kazandın!",
-    "type": "info",
-    "content": "Tebrikler! Tüm görevleri tamamladın 🎉\n\nZorbalık Avcısı Rozeti kazandın 🏅\n\nArtık ZorBaRa’nın bir savunucususun. Yeni görevler ve sohbet modülü seni bekliyor!"
-  }
+  "title": "🎖️ Final Görevi: Rozet Kazanımı",
+  "type": "end",
+  "content": "Tebrikler! Tüm görevleri tamamladın 🎉\n\nAldığın puanlara göre rozetin hesaplanıyor..."
+}
 ]

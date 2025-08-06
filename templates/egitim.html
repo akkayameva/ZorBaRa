@@ -17,12 +17,14 @@
       <button class="btn btn-success" onclick="submitAnswer()" id="submitBtn">Cevabı Gönder ✅</button>
       <div id="feedback" class="mt-3"></div>
       <button id="nextButton" onclick="nextTask()" style="display: none;" class="btn btn-primary mt-3">Sıradaki Göreve Geç ➡️</button>
+      <button id="endButton" onclick="goToHome()" style="display: none;" class="btn btn-secondary mt-3">💬 Konuşmaya Dön</button>
     </div>
   </div>
 
   <script>
     let tasks = [];
     let currentTask = 0;
+    let puanlar = [];
 
     fetch("/static/data/egitim_gorevleri.json")
       .then(response => response.json())
@@ -37,6 +39,7 @@
       document.getElementById("task-content").innerText = task.content;
       document.getElementById("feedback").innerText = "";
       document.getElementById("nextButton").style.display = "none";
+      document.getElementById("endButton").style.display = "none";
       const inputDiv = document.getElementById("task-input");
       const submitBtn = document.getElementById("submitBtn");
 
@@ -64,9 +67,9 @@
         submitBtn.style.display = "inline-block";
         inputDiv.innerHTML = "";
       } else if (task.type === "end") {
-        submitBtn.innerText = "Ana Sayfaya Dön ⬅️";
-        submitBtn.style.display = "inline-block";
+        submitBtn.style.display = "none";
         inputDiv.innerHTML = "";
+        showFinalFeedback();
       }
     }
 
@@ -113,6 +116,8 @@
             return;
           }
 
+          puanlar.push(feedback.puan);
+
           feedbackDiv.innerHTML = `
             <p><strong>AI Değerlendirme: ${feedback.puan}/5 ⭐</strong></p>
             <p>${feedback.geri_bildirim}</p>
@@ -124,7 +129,7 @@
           feedbackDiv.innerHTML = "<span class='text-danger'>Bağlantı hatası. Lütfen tekrar dene.</span>";
         });
 
-      } else if (task.type === "info" || task.type === "end") {
+      } else if (task.type === "info") {
         nextTask();
       }
     }
@@ -133,10 +138,35 @@
       document.getElementById("nextButton").style.display = "none";
       currentTask++;
       if (currentTask >= tasks.length) {
-        window.location.href = "/";
+        loadTask(); // son görev
       } else {
         loadTask();
       }
+    }
+
+    function showFinalFeedback() {
+      const ortalama = puanlar.length > 0 ? puanlar.reduce((a, b) => a + b, 0) / puanlar.length : 0;
+
+      let rozet = "";
+      if (ortalama >= 4.5) {
+        rozet = "🥇 Empati Ustası Rozeti";
+      } else if (ortalama >= 3) {
+        rozet = "🥈 Farkındalık Yolcusu Rozeti";
+      } else {
+        rozet = "🥉 Yeni Başlayan Rozeti";
+      }
+
+      document.getElementById("feedback").innerHTML = `
+        <hr>
+        <h5>🎉 Eğitim Tamamlandı!</h5>
+        <p><strong>Ortalama Puan:</strong> ${ortalama.toFixed(1)} / 5</p>
+        <p><strong>Kazandığın Rozet:</strong> ${rozet}</p>
+      `;
+      document.getElementById("endButton").style.display = "inline-block";
+    }
+
+    function goToHome() {
+      window.location.href = "/";
     }
   </script>
 </body>
