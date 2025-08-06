@@ -12,6 +12,7 @@
 
     <div class="card p-4" id="task-box" style="min-height: 300px;">
       <h4 id="task-title">Yükleniyor...</h4>
+      <div id="task-info" class="mb-2 text-muted" style="font-size: 0.95em;"></div>
       <div id="task-content" class="mb-3"></div>
       <div id="task-input" class="mb-3"></div>
       <button class="btn btn-success" onclick="submitAnswer()" id="submitBtn">Cevabı Gönder ✅</button>
@@ -36,16 +37,16 @@
     function loadTask() {
       const task = tasks[currentTask];
       document.getElementById("task-title").innerText = task.title;
-      document.getElementById("task-content").innerText = task.content;
-      document.getElementById("feedback").innerText = "";
+      document.getElementById("task-info").innerText = task.info || "";
+      document.getElementById("feedback").innerHTML = "";
       document.getElementById("nextButton").style.display = "none";
       document.getElementById("endButton").style.display = "none";
       const inputDiv = document.getElementById("task-input");
       const submitBtn = document.getElementById("submitBtn");
-
       inputDiv.innerHTML = "";
 
       if (task.type === "quiz") {
+        document.getElementById("task-content").innerText = task.content;
         submitBtn.innerText = "Cevabı Gönder ✅";
         submitBtn.style.display = "inline-block";
         task.options.forEach((opt, index) => {
@@ -56,19 +57,26 @@
             </div>
           `;
         });
+
       } else if (task.type === "text") {
+        document.getElementById("task-content").innerText = task.content;
         submitBtn.innerText = "Cevabı Gönder ✅";
         submitBtn.style.display = "inline-block";
         inputDiv.innerHTML = `
           <textarea class="form-control" id="text-answer" rows="3" placeholder="Cevabını yaz..."></textarea>
         `;
+
       } else if (task.type === "info") {
+        document.getElementById("task-content").innerText = task.content;
+        inputDiv.innerHTML = "";
         submitBtn.innerText = "Devam Et ➡️";
         submitBtn.style.display = "inline-block";
-        inputDiv.innerHTML = "";
+
       } else if (task.type === "end") {
-        submitBtn.style.display = "none";
+        document.getElementById("task-content").innerText = task.content;
+        document.getElementById("task-info").innerText = "";
         inputDiv.innerHTML = "";
+        submitBtn.style.display = "none";
         showFinalFeedback();
       }
     }
@@ -77,6 +85,7 @@
       const task = tasks[currentTask];
       const feedbackDiv = document.getElementById("feedback");
       const nextBtn = document.getElementById("nextButton");
+      const submitBtn = document.getElementById("submitBtn");
 
       if (task.type === "quiz") {
         const selected = document.querySelector('input[name="quiz"]:checked');
@@ -87,6 +96,7 @@
         if (task.correct.includes(parseInt(selected.value))) {
           feedbackDiv.innerHTML = "<span class='text-success'>✅ Doğru cevap!</span>";
           nextBtn.style.display = "inline-block";
+          submitBtn.style.display = "none";
         } else {
           feedbackDiv.innerHTML = "<span class='text-danger'>❌ Yanlış cevap. Tekrar dene.</span>";
         }
@@ -123,6 +133,7 @@
             <p>${feedback.geri_bildirim}</p>
           `;
           nextBtn.style.display = "inline-block";
+          submitBtn.style.display = "none";
         })
         .catch(err => {
           console.error(err);
@@ -137,17 +148,13 @@
     function nextTask() {
       document.getElementById("nextButton").style.display = "none";
       currentTask++;
-      if (currentTask >= tasks.length) {
-        loadTask(); // son görev
-      } else {
-        loadTask();
-      }
+      loadTask();
     }
 
     function showFinalFeedback() {
       const ortalama = puanlar.length > 0 ? puanlar.reduce((a, b) => a + b, 0) / puanlar.length : 0;
-
       let rozet = "";
+
       if (ortalama >= 4.5) {
         rozet = "🥇 Empati Ustası Rozeti";
       } else if (ortalama >= 3) {

@@ -21,3 +21,9 @@ body {
   50% { box-shadow: 0 0 20px #f1c40f; }
   100% { box-shadow: 0 0 5px #f1c40f; }
 }
+
+.alert-info {
+  background-color: #e8f4fc;
+  border-left: 6px solid #17a2b8;
+  font-style: italic;
+}
