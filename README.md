@@ -92,9 +92,7 @@ Gemini'nin katkısıyla her kullanıcı:
 - **Pedagojik Yapı:** Empatik dil + görsel destek + görev temelli öğrenme
 
 ## Tanıtım Videosu
-<video width="640" height="360" controls>
-  <source src="https://github.com/akkayameva/ZorBaRa/blob/master/zorbara_video.mp4?raw=true" type="video/mp4">
-</video>
+[![ZorBaRa Tanıtım Videosu](https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_baslangic.png?raw=true)](https://github.com/akkayameva/ZorBaRa/blob/master/zorbara.mp4?raw=true)
 
 
 ## Görseller
@@ -108,7 +106,7 @@ Gemini'nin katkısıyla her kullanıcı:
 <img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_rozet.png?raw=true"  />
 
 ###TELEGRAM
-<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_bot.png.png?raw=true"  />
+<img src="https://github.com/akkayameva/ZorBaRa/blob/master/images/zorbara_bot.png?raw=true"  />
 
 ## 🤝 BTK Yarışması Bağlamı
 
