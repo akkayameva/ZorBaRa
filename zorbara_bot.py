@@ -6,8 +6,7 @@ from telegram.ext import (
     ApplicationBuilder, CommandHandler, MessageHandler,
     filters, ConversationHandler, ContextTypes
 )
-from gemini_api import evaluate_answer_with_gemini, get_gemini_response_with_emergency_flag, \
-    get_gemini_response_with_context
+from gemini_api import evaluate_answer_with_gemini, get_gemini_analysis
 
 load_dotenv()
 TOKEN = os.getenv("TELEGRAM_TOKEN")
@@ -19,7 +18,7 @@ class ZorBaRaBot:
         self.app = ApplicationBuilder().token(TOKEN).build()
         self.gorevler = self._load_gorevler()
         self.kullanici_durum = {}
-        self.sohbet_gecmisi = {}  # 👈 Kullanıcı başına mesaj geçmişi
+        self.sohbet_gecmisi = {}
         self._register_handlers()
 
     def _load_gorevler(self):
@@ -48,7 +47,7 @@ class ZorBaRaBot:
 
     async def yardim(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(
-            "🆘 *Acil Yardım Hattı Bilgileri:*\n\n"
+            "🖘 *Acil Yardım Hattı Bilgileri:*\n\n"
             "📞 112 – Acil Sağlık\n"
             "📞 155 – Polis İmdat\n"
             "📞 183 – Aile, Kadın, Çocuk Sosyal Destek\n\n"
@@ -58,10 +57,7 @@ class ZorBaRaBot:
 
     async def egitim(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         user_id = update.effective_user.id
-        self.kullanici_durum[user_id] = {
-            "gorev_index": 0,
-            "puanlar": []
-        }
+        self.kullanici_durum[user_id] = {"gorev_index": 0, "puanlar": []}
         await self._gorev_gonder(update, user_id)
         return EGITIM
 
@@ -138,32 +134,33 @@ class ZorBaRaBot:
         user_id = update.effective_user.id
         mesaj = update.message.text.strip()
 
-        # 🔁 Geçmişi güncelle
         self.sohbet_gecmisi.setdefault(user_id, []).append(mesaj)
         if len(self.sohbet_gecmisi[user_id]) > 10:
             self.sohbet_gecmisi[user_id] = self.sohbet_gecmisi[user_id][-10:]
 
-        gecmis = self.sohbet_gecmisi[user_id]
-        yanit, acil = get_gemini_response_with_context(mesaj, gecmis[:-1])
+        history = self.sohbet_gecmisi[user_id][:-1]
+        yanit, acil, egitim = get_gemini_analysis(mesaj, history)
 
-        # 💬 Yanıtı göster ve geçmişe ekle
-        await update.message.reply_text(yanit)
-        self.sohbet_gecmisi[user_id].append(yanit)
+        for par in yanit.split("\n\n"):
+            if par.strip():
+                await update.message.reply_text(par.strip())
 
         if acil:
             await update.message.reply_text(
-                "🚨 *Bu önemli bir konu olabilir.*\nLütfen aşağıdaki hatalardan biriyle iletişime geç:\n\n"
+                "🚨 *Bu önemli bir konu olabilir.*\n"
+                "Lütfen aşağıdaki hatalardan biriyle iletişime geç:\n\n"
                 "📞 183 – Aile, Kadın, Çocuk Sosyal Destek\n"
                 "📞 112 – Acil Sağlık\n"
                 "📞 155 – Polis İmdat",
                 parse_mode="Markdown"
             )
 
-        # 🎓 Eğitim kelimesi geçiyorsa yönlendir
-        if any(anahtar in mesaj.lower() for anahtar in ["eğitim", "görev", "radar", "rozet"]):
+        if egitim:
             await update.message.reply_text(
-                "🎓 Eğer kendini geliştirmek istersen /egitim yazarak görevlerle başlayabilirsin!"
+                "🎓 Kendini geliştirmek istersen /egitim yazarak görevlerle başlayabilirsin!"
             )
+
+        self.sohbet_gecmisi[user_id].append(yanit)
 
     def run(self):
         print("✅ ZorBaRa Telegram Botu başlatıldı.")

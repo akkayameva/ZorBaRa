@@ -4,7 +4,6 @@ import json
 from dotenv import load_dotenv
 from google.generativeai.types import GenerationConfig
 
-
 load_dotenv()
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 model = genai.GenerativeModel(
@@ -42,45 +41,9 @@ def evaluate_answer_with_gemini(soru, cevap):
             "geri_bildirim": "AI değerlendirmesi alınamadı. Lütfen tekrar deneyin."
         }, ensure_ascii=False)
 
-def get_gemini_response_with_emergency_flag(prompt):
-    full_prompt = (
-        f"Kullanıcının mesajı:\n\"{prompt}\"\n\n"
-        "Sen bir çocuk ve genç destek hattında görevli, çok duyarlı ve yargılamayan bir yapay zekasın.\n"
-        "Kullanıcın şu anda üzgün, kafası karışık, kırılmış veya çaresiz hissediyor olabilir.\n"
-        "Senin görevin onun mesajını ciddiye almak, ona yalnız olmadığını hissettirmek ve nazikçe destek sunmak.\n\n"
-
-        "Cevap verirken:\n"
-        "- Karşındaki bir danışan değil, duygusal desteğe ihtiyacı olan biri. Ona bir arkadaş gibi yaklaş.\n"
-        "- Samimi, sade ve içten yaz. ‘Anlıyorum, bu çok zor olabilir…’ gibi yumuşak girişler kullan.\n"
-        "- Gerektiğinde madde madde çözüm önerileri sun, ama önce duygusunu karşıla.\n"
-        "- Gerekli yerlerde sade ve anlamlı emojiler kullan (🤝, 💡, 📷, 🚫, ❤️, ☀️, 💬). Aşırıya kaçma.\n"
-        "- Kısa paragraflar kullan. Her paragraf bir düşünce veya duygu taşısın.\n"
-        "- Asla yargılayıcı olma, asla ‘şunu yapmalısın’ deme. Yönlendirme değil, eşlik et.\n"
-        "- Cevabının sonunda 'İstersen biraz daha konuşabiliriz 💬' gibi bir açık kapı bırak.\n\n"
-
-        "Ayrıca bu mesaj sence aşağıdaki kritik durumlardan birini içeriyor mu?\n"
-        "- İntihar düşüncesi\n- Taciz, istismar\n- Şiddet tehdidi\n- Ciddi depresyon belirtisi\n\n"
-        "Eğer böyle bir durum varsa, sadece şunu en alta ekle:\n"
-        "ACİL_DURUM: EVET\n\n"
-        "Eğer yoksa:\n"
-        "ACİL_DURUM: HAYIR\n"
-    )
-
-    try:
-        response = model.generate_content(full_prompt)
-        full_response = response.text.strip()
-        emergency = "ACİL_DURUM: EVET" in full_response
-        reply = full_response.replace("ACİL_DURUM: EVET", "").replace("ACİL_DURUM: HAYIR", "").strip()
-        print("📤 Gemini yanıtı:\n", full_response)
-        return reply, emergency
-    except Exception as e:
-        print("❌ Emergency kontrol hatası:", e)
-        return "Bir sorun oluştu. Lütfen tekrar dene.", False
-
-def get_gemini_response_with_context(prompt, history=None):
+def get_gemini_analysis(prompt, history=None):
     """
-    Multi-turn chat için bağlamlı cevap üretir.
-    history: ["kullanıcı mesajı", "bot cevabı", "kullanıcı mesajı", ...]
+    Kullanıcının mesajına empatik yanıt, acil durum tespiti ve eğitim ihtiyacı analizi üretir.
     """
     if history is None:
         history = []
@@ -91,13 +54,28 @@ def get_gemini_response_with_context(prompt, history=None):
         messages.append({"role": role, "parts": [msg]})
     messages.append({"role": "user", "parts": [prompt]})
 
+    full_prompt = (
+        f"Kullanıcının mesajı:\n\"{prompt}\"\n\n"
+        "1. Pedagojik ve empatik bir dille, çocuğa/ergene hitap ederek yanıt ver.Acınası bir dille olmasın samimi ol ve bunun zorbalık olduğunu tanımla\n"
+        "2. Eğer mesajda intihar, taciz, ciddi depresyon veya şiddet tehdidi varsa şunu sona ekle:\n"
+        "ACİL_DURUM: EVET\nYOKSA: ACİL_DURUM: HAYIR\n"
+        "Eğer kullanıcı bu mesajda doğrudan eğitim istiyorsa şunu ekle:\n"
+        "EGITIM_ONERI: EVET\nYOKSA: EGITIM_ONERI: HAYIR\n"
+        "\nYalnızca yanıt + 2 etiketi döndür (ek açıklama yok).\n"
+    )
+
     try:
         convo = model.start_chat(history=messages)
-        response = convo.send_message(prompt)
+        response = convo.send_message(full_prompt)
         yanit = response.text.strip()
+
         emergency = "ACİL_DURUM: EVET" in yanit
-        yanit = yanit.replace("ACİL_DURUM: EVET", "").replace("ACİL_DURUM: HAYIR", "").strip()
-        return yanit, emergency
+        egitim = "EGITIM_ONERI: EVET" in yanit
+
+        yanit = yanit.replace("ACİL_DURUM: EVET", "").replace("ACİL_DURUM: HAYIR", "")
+        yanit = yanit.replace("EGITIM_ONERI: EVET", "").replace("EGITIM_ONERI: HAYIR", "").strip()
+
+        return yanit, emergency, egitim
     except Exception as e:
-        print("❌ Multi-turn chat hatası:", e)
-        return "Bir sorun oluştu. Lütfen tekrar dene.", False
+        print("❌ Yanıt analiz hatası:", e)
+        return "Bir sorun oluştu. Lütfen tekrar dene.", False, False

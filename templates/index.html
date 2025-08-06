@@ -38,45 +38,68 @@
 
   <script>
     async function sendMessage() {
-      const input = document.getElementById("user-input");
-      const chatBox = document.getElementById("chat-box");
-      const message = input.value.trim();
-      if (!message) return;
-
-      chatBox.innerHTML += `<div><strong>Sen:</strong> ${message}</div>`;
-      input.value = "";
-
-      const response = await fetch("/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message })
-      });
-
-      const data = await response.json();
-      const reply = data.reply;
-      const emergency = data.emergency;
-
-      if (emergency) {
-      document.querySelector(".card").classList.add("emergency-mode");
-    }
-
-    const formattedReply = marked.parse(reply);
-chatBox.innerHTML += `<div><strong>ZorBaRa:</strong><br>${formattedReply}</div>`;
+  const input = document.getElementById("user-input");
+  const chatBox = document.getElementById("chat-box");
+  const message = input.value.trim();
+  if (!message) return;
 
 
-    if (emergency) {
-      chatBox.innerHTML += `
-        <div class="mt-2">
-          <strong>🤝 Yardımcı Olabilecek Yerler:</strong><br>
-          <a href="tel:183" class="btn btn-sm btn-warning mt-2 me-2">📞 183 – Sosyal Destek Hattı</a>
-          <a href="tel:112" class="btn btn-sm btn-danger mt-2 me-2">🚑 112 – Acil Sağlık Yardımı</a>
-          <a href="tel:155" class="btn btn-sm btn-primary mt-2">🚔 155 – Polis İmdat</a>
-        </div>
-      `;
-    }
+  chatBox.innerHTML += `<div><strong>Sen:</strong> ${message}</div>`;
+  input.value = "";
 
-    chatBox.scrollTop = chatBox.scrollHeight;
+  // Gemini API
+  const response = await fetch("/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ message })
+  });
+
+  const data = await response.json();
+  const reply = data.reply;
+  const emergency = data.emergency;
+  const showEducationPrompt = data.show_education_prompt;
+
+
+  const formattedReply = marked.parse(reply);
+  chatBox.innerHTML += `<div><strong>ZorBaRa:</strong><br>${formattedReply}</div>`;
+
+
+  if (showEducationPrompt) {
+    chatBox.innerHTML += `
+      <div class="mt-3 p-2 border border-warning rounded bg-light">
+        🎓 Görünüşe göre farkındalık yolculuğun seni etkiliyor!<br>
+        Eğitim görevlerine devam etmek ister misin?<br>
+        👉 <a href="/egitim" class="btn btn-sm btn-warning mt-2">🎓 Eğitime Başla</a>
+      </div>
+    `;
   }
+
+  // Acil durum tespiti ve kriz yönlendirmesi
+  if (emergency) {
+    document.querySelector(".card").classList.add("emergency-mode");
+
+    chatBox.innerHTML += `
+      <div class="mt-2">
+        <strong>⚠️ Acil Durum Algılandı</strong><br>
+        Şu anda yalnız değilsin. Sana yardımcı olabilecek kaynaklar:<br>
+        <a href="tel:183" class="btn btn-sm btn-warning mt-2 me-2">📞 183 – Sosyal Destek Hattı</a>
+        <a href="tel:112" class="btn btn-sm btn-danger mt-2 me-2">🚑 112 – Acil Sağlık Yardımı</a>
+        <a href="tel:155" class="btn btn-sm btn-primary mt-2">🚔 155 – Polis İmdat</a>
+      </div>
+
+      <div class="mt-3 p-3 bg-light border border-danger rounded">
+        🧘‍♀️ Hadi birlikte sakinleşelim.<br>
+        👉 <strong>Şimdi 3 dakikalık bir nefes egzersizi yapmayı deneyebilirsin.</strong><br>
+        İstersen bu kişileri engelledin mi, kontrol et. Eğer engellediysen tıkla:
+        <button class="btn btn-sm btn-success mt-2">✅ Evet, Engelledim</button>
+      </div>
+    `;
+  }
+
+  // Otomatik aşağı kaydır
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
+
   </script>
 </body>
 </html>
